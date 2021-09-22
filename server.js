@@ -10,16 +10,32 @@ const signin = require('./controllers/signin');
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
 
+// const db = knex({
+//   client: 'pg',
+//   connectionString:process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
+
 const db = knex({
-  client: 'pg',
-  connectionString: process.env.postgresql-flat-21429,
+  client:'pg',
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
-});
+})
 
 
 const app = express();
+
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", '*');
+//   res.header("Access-Control-Allow-Credentials", true);
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//   res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+//   next();
+// });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
