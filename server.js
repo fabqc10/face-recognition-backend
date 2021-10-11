@@ -11,24 +11,24 @@ const signin = require('./controllers/signin');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
 
 
-// const db = knex({
-//   // connect to your own database here:
-//   client: 'pg',
-//   connection: {
-//     host : '127.0.0.1',
-//     user : 'postgres',
-//     password : '1234',
-//     database : 'smart-brain'
-//   }
-// });
-
 const db = knex({
-  client:'pg',
+  // connect to your own database here:
+  client: 'pg',
   connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl:true,
+    host : 'postgresql-regular-01105',
+    user : 'postgres',
+    password : '1234',
+    database : 'smart-brain'
   }
-})
+});
+
+// const db = knex({
+//   client:'pg',
+//   connection: {
+//     connectionString: process.env.DATABASE_URL,
+//     ssl:true,
+//   }
+// })
 
 
 const app = express();
