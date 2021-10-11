@@ -11,13 +11,24 @@ const signin = require('./controllers/signin');
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0; 
 
 
+// const db = knex({
+//   // connect to your own database here:
+//   client: 'pg',
+//   connection: {
+//     host : '127.0.0.1',
+//     user : 'postgres',
+//     password : '1234',
+//     database : 'smart-brain'
+//   }
+// });
+
 const db = knex({
   client:'pg',
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl:true,
   }
-});
+})
 
 
 const app = express();
@@ -34,11 +45,11 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 
 
 app.get('/', (req, res)=> { res.send(db.users) })
@@ -54,7 +65,7 @@ app.put('/image', (req,res)=>{image.handleImage(req,res,db)});
 app.post('/imageurl', (req,res)=>{image.handleApiCall(req,res)});
 
 
-const PORT = process.env.PORT;
-app.listen(PORT || 3000, ()=> {
-  console.log(`app is running on port ${PORT}`);
+
+app.listen(process.env.PORT || 3000, ()=> {
+  console.log(`app is running on port ${process.env.PORT}`);
 })
