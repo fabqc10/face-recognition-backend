@@ -25,7 +25,7 @@ const signin = require('./controllers/signin');
 // });
 
 const db = knex({
-  client: pg,
+  client: 'pg',
   connection: {
     connectionString: process.env.DATABASE_URL,
     ssl:false,
