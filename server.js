@@ -11,7 +11,7 @@ const profile = require('./controllers/profile');
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = 1; 
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = 1; 
 
 
 // const db = knex({
@@ -29,7 +29,9 @@ const db = knex({
   client: 'pg',
   connection: {
     connectionString:process.env.DATABASE_URL,
-    ssl:false
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 })
 
