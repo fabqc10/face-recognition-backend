@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt-nodejs')
 const cors = require('cors')
 const knex = require('knex')
 const pg = require('pg');
+const timeout = require('connect-timeout')
 
 
 const image = require('./controllers/image');
@@ -35,6 +36,7 @@ const db = knex({
 
 
 const app = express();
+app.use(timeout('5s'))
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", '*');
